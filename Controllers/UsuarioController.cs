@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MyFinance.Models;
+using System.Security.Cryptography.X509Certificates;
 
 namespace MyFinance.Controllers
 {
@@ -7,6 +9,21 @@ namespace MyFinance.Controllers
         public IActionResult Login()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult ValidarLogin(UsuarioModel usuario)
+        {
+            bool login = usuario.ValidarLogin();
+            if (login)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                TempData["MensagemLoginInvalido"] = "Dados de Login Inválido!";
+                return RedirectToAction("Login");
+            }
         }
     }
 }
