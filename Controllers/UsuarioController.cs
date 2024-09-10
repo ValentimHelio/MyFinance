@@ -10,12 +10,19 @@ namespace MyFinance.Controllers
         [HttpGet]
         public IActionResult Login(int? id)
         {
-            if(id != null && id == 0)
+            if (id != null && id == 0)
             {
                 HttpContext.Session.SetInt32("IDUsuarioLogado", 0);
                 HttpContext.Session.SetString("NomeUsuarioLogado", string.Empty);
             }
 
+            return View();
+        }
+
+        [HttpPost]
+        [HttpGet]
+        public IActionResult Registrar(UsuarioModel usuario)
+        {
             return View();
         }
 
